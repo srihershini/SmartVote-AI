@@ -25,33 +25,36 @@ SmartVote-AI is a digital voting application designed to improve accessibility a
 
 ### 🔹 Login Screens
 <p align="center">
-  <img src="login1.png" width="250"/>
-  <img src="login2.png" width="250"/>
+  <img src="login1.jpeg" width="250"/>
+  <img src="login 2.jpeg" width="250"/>
 </p>
 
 ---
 
-### 🔹 Verification Screen
+### 🔹 Verification Screens
 <p align="center">
-  <img src="verification.png" width="250"/>
+  <img src="verification 1.jpeg" width="250"/>
+  <img src="verification 2.jpeg" width="250"/>
 </p>
 
 ---
 
 ### 🔹 Voting Screens
 <p align="center">
-  <img src="voting1.png" width="250"/>
-  <img src="voting2.png" width="250"/>
+  <img src="voting 1.jpeg" width="250"/>
+  <img src="voting 2.jpeg" width="250"/>
+  <img src="voting 3.jpeg" width="250"/>
 </p>
 
 ---
 
-### 🔹 Results Screen
+### 🔹 Results Screens
 <p align="center">
-  <img src="results.png" width="250"/>
+  <img src="result 1.jpeg" width="250"/>
+  <img src="result 2.jpeg" width="250"/>
+  <img src="result 3.jpeg" width="250"/>
 </p>
 ---
-
 ## 🛠️ Tech Stack
 
 - Frontend: React / Next.js
