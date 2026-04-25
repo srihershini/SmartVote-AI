@@ -5,7 +5,7 @@ An AI-powered digital voting system that enables secure, accessible, and transpa
 ---
 ## 👩‍💻 Author
 
-**Sri Hershini**
+**Sri Hershini P**
 ---
 
 ## 🔗 Live Preview
@@ -66,6 +66,11 @@ SmartVote-AI is a digital voting application designed to improve accessibility a
 </p>
 
 ---
+## 👩‍💻 Author
+
+**Sri Hershini P**
+---
+
 
 ## 🛠️ Tech Stack
 
