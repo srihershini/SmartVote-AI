@@ -23,10 +23,33 @@ SmartVote-AI is a digital voting application designed to improve accessibility a
 
 ## 📱 Screenshots
 
-![Login](login.png)  
-![Voting](voting.png)  
-![Results](results.png)
+### 🔹 Login Screens
+<p align="center">
+  <img src="login1.png" width="250"/>
+  <img src="login2.png" width="250"/>
+</p>
 
+---
+
+### 🔹 Verification Screen
+<p align="center">
+  <img src="verification.png" width="250"/>
+</p>
+
+---
+
+### 🔹 Voting Screens
+<p align="center">
+  <img src="voting1.png" width="250"/>
+  <img src="voting2.png" width="250"/>
+</p>
+
+---
+
+### 🔹 Results Screen
+<p align="center">
+  <img src="results.png" width="250"/>
+</p>
 ---
 
 ## 🛠️ Tech Stack
