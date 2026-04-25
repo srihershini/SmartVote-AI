@@ -3,6 +3,10 @@
 An AI-powered digital voting system that enables secure, accessible, and transparent remote voting.
 
 ---
+## 👩‍💻 Author
+
+**Sri Hershini**
+---
 
 ## 🔗 Live Preview
 
