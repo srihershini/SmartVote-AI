@@ -4,6 +4,12 @@ An AI-powered digital voting system that enables secure, accessible, and transpa
 
 ---
 
+## 🔗 Live Preview
+
+[Click here to view the app](https://aistudio.google.com/apps/72a9465e-b279-4dbf-b748-d6281f436f75)
+
+---
+
 ## 📌 Project Overview
 
 SmartVote-AI is a digital voting application designed to improve accessibility and transparency. It allows users to vote remotely with secure authentication and ensures a strict one-person-one-vote policy.
@@ -54,7 +60,9 @@ SmartVote-AI is a digital voting application designed to improve accessibility a
   <img src="result 2.jpeg" width="250"/>
   <img src="result 3.jpeg" width="250"/>
 </p>
+
 ---
+
 ## 🛠️ Tech Stack
 
 - Frontend: React / Next.js
