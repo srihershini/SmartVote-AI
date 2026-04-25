@@ -1,0 +1,6 @@
+{
+  "name": "SmartVote-AI: Secure Digital Democracy",
+  "description": "A high-security, inclusive digital voting platform featuring Biometric & Aadhar verification, real-time results, and AI-powered voice assistance for accessibility.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": []
+}
