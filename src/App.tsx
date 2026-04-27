@@ -1251,35 +1251,7 @@ const fetchResults = async () => {
   }
 };
 
- const handleOtpSubmit = async (e?: React.FormEvent) => {
-  if (e) e.preventDefault();
-
-  if (otp.length !== 6) {
-    setError('Please enter a valid 6-digit OTP');
-    return;
-  }
-
-  setError('');
-  setIsProcessing(true);
-  setRetryAction(() => () => handleOtpSubmit());
-
-  try {
-    // ✅ DEMO LOGIC (NO API CALL)
-
-    if (otp === '123456') {
-      setAppState('BIOMETRICS');
-      const t = TRANSLATIONS[language];
-      speak(t.aadharVerifiedMsg);
-    } else {
-      setError('Invalid OTP');
-    }
-
-  } catch (err) {
-    setError(getFriendlyErrorMessage(err, 'verifying your OTP'));
-  } finally {
-    setIsProcessing(false);
-  }
-};
+ 
 
   useEffect(() => {
     if (appState === 'OTP_VERIFICATION' && !otp) {
@@ -3217,30 +3189,36 @@ const fetchResults = async () => {
         mobile: "9876543210"
       })
     });
-
-    console.log("Request sent");
-    console.log("Status:", res.status);
-
-    const text = await res.text();
-    console.log("RAW RESPONSE:", text);
-
-    let data;
+<button
+  onClick={async () => {
     try {
-      data = JSON.parse(text);
-      console.log("PARSED:", data);
-      alert("API Success ✅");
-    } catch (e) {
-      console.error("JSON ERROR:", e);
-      alert("Not JSON response ❌");
-    }
+      console.log("Request sent");
 
-  } catch (e) {
-    alert("API Failed ❌");
-    console.error(e);
-  }
-}}>
+      const res = await fetch("/api/test");
+
+      console.log("Status:", res.status);
+
+      const text = await res.text();
+      console.log("RAW RESPONSE:", text);
+
+      try {
+        const data = JSON.parse(text);
+        console.log("PARSED:", data);
+        alert("API Success ✅");
+      } catch (e) {
+        console.error("JSON ERROR:", e);
+        alert("Not JSON response ❌");
+      }
+
+    } catch (e) {
+      alert("API Failed ❌");
+      console.error(e);
+    }
+  }}
+>
   TEST API
 </button>
 </div>
 );
 }
+    
