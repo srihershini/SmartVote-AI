@@ -1055,17 +1055,27 @@ export default function App() {
   // Background activity animation is now driven by server-side simulation
   // and interval polling in fetchResults
 
-  const fetchResults = async () => {
-    try {
-      const res = await fetch('/api/results');
-      if (!res.ok) throw res;
-      const data = await res.json();
-      setCandidates(data.candidates);
-      setLastUpdated(new Date());
-    } catch (err) {
-      console.error('Fetch results error:', err);
-      // We don't show user-facing error for background polling to avoid disruption
-    }
+const fetchResults = async () => {
+  try {
+    setCandidates([
+      {
+        id: "1",
+        name: { en: "Candidate A" },
+        symbol: "🌟",
+        votes: 120
+      },
+      {
+        id: "2",
+        name: { en: "Candidate B" },
+        symbol: "🔥",
+        votes: 90
+      }
+    ]);
+    setLastUpdated(new Date());
+  } catch (err) {
+    console.error('Fetch results error:', err);
+  }
+
   };
 
   const speak = (text: string) => {
@@ -1201,69 +1211,75 @@ export default function App() {
     setRetryAction(() => () => handleAadharSubmit());
     
     try {
-      const res = await fetch('/api/verify-aadhar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ aadhar }),
-      });
-      
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setError(data.error || getFriendlyErrorMessage(res, 'verifying your identity'));
-        return;
-      }
-      
-      const data = await res.json();
-      
-      if (data.hasVoted) {
-        setAppState('ALREADY_VOTED');
-        const t = TRANSLATIONS[language];
-        speak(t.restrictedSub);
-      } else {
-        setAppState('OTP_VERIFICATION');
-        setResendTimer(30);
-        const t = TRANSLATIONS[language];
-        speak(t.otpSub);
-      }
-    } catch (err) {
-      setError(getFriendlyErrorMessage(err, 'verifying your identity'));
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+      const handleAadharSubmit = async (e?: React.FormEvent) => {
+  if (e) e.preventDefault();
 
-  const handleOtpSubmit = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    if (otp.length !== 6) {
-      setError('Please enter a valid 6-digit OTP');
-      return;
+  if (aadhar.length !== 12) {
+    setError('Please enter a valid 12-digit Aadhaar number');
+    return;
+  }
+
+  if (mobile.length !== 10) {
+    setError('Please enter a valid 10-digit mobile number');
+    return;
+  }
+
+  setError('');
+  setIsProcessing(true);
+  setRetryAction(() => () => handleAadharSubmit());
+
+  try {
+    // ✅ DEMO LOGIC (NO API CALL)
+
+    if (aadhar === "111122223333") {
+      // simulate already voted case
+      setAppState('ALREADY_VOTED');
+      const t = TRANSLATIONS[language];
+      speak(t.restrictedSub);
+    } else {
+      // normal flow
+      setAppState('OTP_VERIFICATION');
+      setResendTimer(30);
+      const t = TRANSLATIONS[language];
+      speak(t.otpSub);
     }
-    setError('');
-    setIsProcessing(true);
-    setRetryAction(() => () => handleOtpSubmit());
-    
-    try {
-      const res = await fetch('/api/verify-otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ aadhar, otp }),
-      });
-      
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setError(data.error || 'Invalid OTP');
-        return;
-      }
-      
+
+  } catch (err) {
+    setError(getFriendlyErrorMessage(err, 'verifying your identity'));
+  } finally {
+    setIsProcessing(false);
+  }
+};
+
+ const handleOtpSubmit = async (e?: React.FormEvent) => {
+  if (e) e.preventDefault();
+
+  if (otp.length !== 6) {
+    setError('Please enter a valid 6-digit OTP');
+    return;
+  }
+
+  setError('');
+  setIsProcessing(true);
+  setRetryAction(() => () => handleOtpSubmit());
+
+  try {
+    // ✅ DEMO LOGIC (NO API CALL)
+
+    if (otp === '123456') {
       setAppState('BIOMETRICS');
       const t = TRANSLATIONS[language];
       speak(t.aadharVerifiedMsg);
-    } catch (err) {
-      setError(getFriendlyErrorMessage(err, 'verifying your OTP'));
-    } finally {
-      setIsProcessing(false);
+    } else {
+      setError('Invalid OTP');
     }
-  };
+
+  } catch (err) {
+    setError(getFriendlyErrorMessage(err, 'verifying your OTP'));
+  } finally {
+    setIsProcessing(false);
+  }
+};
 
   useEffect(() => {
     if (appState === 'OTP_VERIFICATION' && !otp) {
