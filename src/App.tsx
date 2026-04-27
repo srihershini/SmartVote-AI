@@ -3201,6 +3201,8 @@ export default function App() {
         mobile: "9876543210"
       })
     });
+    console.log("Request sent");
+    console.log("Status:",res.status);
 
     const data = await res.json();
     alert("API Success ✅");
