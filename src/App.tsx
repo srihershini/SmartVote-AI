@@ -33,7 +33,7 @@ import {
 } from 'lucide-react';
 import { getVoiceGuidance } from './services/geminiService';
 
-type AppState = 'LANDING' | 'VERIFY_AADHAR' | 'OTP_VERIFICATION' | 'BIOMETRICS' | 'VOTING' | 'ALREADY_VOTED' | 'RESULTS' | 'THANK_YOU';
+type AppState = 'LANDING' | 'VERIFY_AADHAAR' | 'OTP_VERIFICATION' | 'BIOMETRICS' | 'VOTING' | 'ALREADY_VOTED' | 'RESULTS' | 'THANK_YOU';
 
 interface Candidate {
   id: string;
@@ -59,7 +59,7 @@ const TRANSLATIONS: Record<string, any> = {
     heroTitle: "Participate in the Greatest Democracy.",
     heroSub: "SmartVote-AI NRI & Domestic E-Portal. Secure authentication for all citizens.",
     startBtn: "Start Verification",
-    aadharTitle: "National Aadhar Check",
+    aadhaarTitle: "National Aadhaar Check",
     aadharSub: "Enter your 12-digit number for cryptographic validation.",
     bioTitle: "Physiological Matching",
     bioFace: "Facial Recognition",
@@ -174,8 +174,8 @@ const TRANSLATIONS: Record<string, any> = {
     manifestoTitle: "पार्टी घोषणापत्र",
     leaderTitle: "पार्टी नेता",
     startBtn: "सत्यापन शुरू करें",
-    aadharTitle: "राष्ट्रीय आधार जांच",
-    aadharSub: "क्रिप्टोग्राफिक सत्यापन के लिए अपना 12-अंकों का नंबर दर्ज करें।",
+    aadhaarTitle: "राष्ट्रीय आधार जांच",
+    aadhaarSub: "क्रिप्टोग्राफिक सत्यापन के लिए अपना 12-अंकों का नंबर दर्ज करें।",
     bioTitle: "शारीरिक मिलान",
     bioFace: "चेहरा पहचान",
     bioFinger: "फिंगरप्रिंट स्कैन",
@@ -228,7 +228,7 @@ const TRANSLATIONS: Record<string, any> = {
     participantPhase: "ने पहले ही इस चुनाव चरण में भाग लिया है। प्रवेश अक्षम।",
     trySearchOther: "किसी भिन्न नाम या पार्टी चिन्ह को खोजने का प्रयास करें।",
     voiceActiveMsg: "आवाज सहायता सक्रिय हो गई है। मैं प्रक्रिया में आपका मार्गदर्शन करूँगा।",
-    aadharVerifiedMsg: "आधार सत्यापित। आगे बढ़ने के लिए कृपया अपना चेहरा और उंगली स्कैन करें।",
+    aadhaarVerifiedMsg: "आधार सत्यापित। आगे बढ़ने के लिए कृपया अपना चेहरा और उंगली स्कैन करें।",
     selectedMsg: "चयनित। मतपत्र तैयार किया जा रहा है।",
     confirmVoteFor: "अपने वोट की पुष्टि करें",
     recordedMsg: "दर्ज किया गया। मतदान के लिए धन्यवाद।",
@@ -872,7 +872,7 @@ export default function App() {
     try {
       const contexts: Record<AppState, string> = {
         'LANDING': 'The user is on the landing page of SmartVote-AI. They should start the verification process.',
-        'VERIFY_AADHAR': 'The user needs to enter their 12-digit Aadhar number for national identification.',
+        'VERIFY_AADHAAR': 'The user needs to enter their 12-digit Aadhar number for national identification.',
         'OTP_VERIFICATION': 'The user needs to enter the 6-digit OTP sent to their mobile for multi-factor authentication.',
         'BIOMETRICS': 'The user is undergoing physiological matching with face and fingerprint scans.',
         'VOTING': 'The user is on the electronic ballot screen. They should select a candidate and confirm their vote.',
@@ -1945,7 +1945,7 @@ export default function App() {
                 <CountdownDisplay />
               </div>
               <button 
-                onClick={() => setAppState('VERIFY_AADHAR')}
+                onClick={() => setAppState('VERIFY_AADHAAR')}
                 className="bg-indigo-600 text-white px-10 py-5 rounded-3xl font-bold text-lg hover:bg-indigo-700 active:scale-95 transition-all shadow-xl shadow-indigo-100 flex items-center gap-4 mx-auto uppercase tracking-wide"
               >
                 {t.startBtn}
@@ -1954,7 +1954,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {appState === 'VERIFY_AADHAR' && (
+          {appState === 'VERIFY_AADHAAR' && (
             <motion.div 
               key="aadhar"
               initial={{ opacity: 0, y: 20 }}
@@ -2030,7 +2030,7 @@ export default function App() {
                     <p className={`${subTextClass} text-sm mt-1`}>{t.otpSub}</p>
                   </div>
                   <button 
-                    onClick={() => setAppState('VERIFY_AADHAR')}
+                    onClick={() => setAppState('VERIFY_AADHAAR')}
                     className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-full transition-colors"
                   >
                     <ArrowLeft size={20} />
