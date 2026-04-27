@@ -1198,61 +1198,69 @@ const fetchResults = async () => {
 
   const handleAadharSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+
     if (aadhar.length !== 12) {
-      setError('Please enter a valid 12-digit Aadhar number');
+      setError('Please enter a valid 12-digit Aadhaar number');
       return;
     }
+
     if (mobile.length !== 10) {
       setError('Please enter a valid 10-digit mobile number');
       return;
     }
+
     setError('');
     setIsProcessing(true);
     setRetryAction(() => () => handleAadharSubmit());
-    
+
     try {
-      const handleAadharSubmit = async (e?: React.FormEvent) => {
-  if (e) e.preventDefault();
+      // ✅ DEMO LOGIC (NO API CALL)
+      if (aadhar === "111122223333") {
+        // simulate already voted case
+        setAppState('ALREADY_VOTED');
+        const t = TRANSLATIONS[language];
+        speak(t.restrictedSub);
+      } else {
+        // normal flow
+        setAppState('OTP_VERIFICATION');
+        setResendTimer(30);
+        const t = TRANSLATIONS[language];
+        speak(t.otpSub);
+      }
+    } catch (err) {
+      setError(getFriendlyErrorMessage(err, 'verifying your identity'));
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
-  if (aadhar.length !== 12) {
-    setError('Please enter a valid 12-digit Aadhaar number');
-    return;
-  }
+  const handleOtpSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
 
-  if (mobile.length !== 10) {
-    setError('Please enter a valid 10-digit mobile number');
-    return;
-  }
-
-  setError('');
-  setIsProcessing(true);
-  setRetryAction(() => () => handleAadharSubmit());
-
-  try {
-    // ✅ DEMO LOGIC (NO API CALL)
-
-    if (aadhar === "111122223333") {
-      // simulate already voted case
-      setAppState('ALREADY_VOTED');
-      const t = TRANSLATIONS[language];
-      speak(t.restrictedSub);
-    } else {
-      // normal flow
-      setAppState('OTP_VERIFICATION');
-      setResendTimer(30);
-      const t = TRANSLATIONS[language];
-      speak(t.otpSub);
+    if (otp.length !== 6) {
+      setError('Please enter a valid 6-digit OTP');
+      return;
     }
 
-  } catch (err) {
-    setError(getFriendlyErrorMessage(err, 'verifying your identity'));
-  } finally {
-    setIsProcessing(false);
-  }
-};
+    setError('');
+    setIsProcessing(true);
+    setRetryAction(() => () => handleOtpSubmit());
 
- 
-
+    try {
+      // ✅ DEMO LOGIC (NO API CALL)
+      if (otp === '123456') {
+        setAppState('BIOMETRICS');
+        const t = TRANSLATIONS[language];
+        speak(t.aadhaarVerifiedMsg);
+      } else {
+        setError('Invalid OTP');
+      }
+    } catch (err) {
+      setError(getFriendlyErrorMessage(err, 'verifying your OTP'));
+    } finally {
+      setIsProcessing(false);
+    }
+  };
   useEffect(() => {
     if (appState === 'OTP_VERIFICATION' && !otp) {
       const timer = setTimeout(() => {
@@ -3179,46 +3187,7 @@ const fetchResults = async () => {
           />
         )}
       </AnimatePresence>
-<button onClick={async () => {
-  try {
-    const res = await fetch('/api/verify-aadhaar', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        aadhaar: "123456789012",
-        mobile: "9876543210"
-      })
-    });
-<button
-  onClick={async () => {
-    try {
-      console.log("Request sent");
-
-      const res = await fetch("/api/test");
-
-      console.log("Status:", res.status);
-
-      const text = await res.text();
-      console.log("RAW RESPONSE:", text);
-
-      try {
-        const data = JSON.parse(text);
-        console.log("PARSED:", data);
-        alert("API Success ✅");
-      } catch (e) {
-        console.error("JSON ERROR:", e);
-        alert("Not JSON response ❌");
-      }
-
-    } catch (e) {
-      alert("API Failed ❌");
-      console.error(e);
-    }
-  }}
->
-  TEST API
-</button>
-</div>
-);
+    </div>
+  );
 }
     
