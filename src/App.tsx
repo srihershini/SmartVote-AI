@@ -43,6 +43,8 @@ interface Candidate {
   manifesto?: string;
   leader?: string;
   voiceKeys?: string[];
+  logo?: string;
+  party?: string;
 }
 
 const LANGUAGES = [
@@ -738,15 +740,25 @@ const CandidateModal = ({ candidate, onClose, t, cardClass, labelClass, subTextC
         className={`w-full max-w-lg rounded-[48px] shadow-2xl border overflow-hidden relative ${cardClass}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-8 sm:p-10">
+        <div className="p-6 sm:p-10">
           <div className="flex justify-between items-start mb-8">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-indigo-600 text-white rounded-[32px] flex items-center justify-center text-4xl shadow-xl shadow-indigo-100">
-                {candidate.symbol}
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="relative">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-indigo-600 text-white rounded-[24px] sm:rounded-[32px] flex items-center justify-center text-3xl sm:text-4xl shadow-xl shadow-indigo-100">
+                  {candidate.symbol}
+                </div>
+                {candidate.logo && (
+                  <img 
+                    src={candidate.logo} 
+                    alt={candidate.party} 
+                    className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white p-1 border shadow-lg border-slate-100" 
+                    referrerPolicy="no-referrer"
+                  />
+                )}
               </div>
               <div>
-                <h3 className="text-2xl font-black tracking-tight">{getCandidateName(candidate)}</h3>
-                <p className={`text-sm font-bold mt-1 ${subTextClass}`}>{candidate.leader || "Democratic Representative"}</p>
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight">{getCandidateName(candidate)}</h3>
+                <p className="text-xs sm:text-sm font-bold mt-1 text-indigo-600 uppercase tracking-widest">{candidate.party}</p>
               </div>
             </div>
             <button 
@@ -760,7 +772,7 @@ const CandidateModal = ({ candidate, onClose, t, cardClass, labelClass, subTextC
           <div className="space-y-8">
             <div>
               <h4 className={`text-[11px] font-black uppercase tracking-widest mb-3 ${labelClass}`}>{t.manifestoTitle}</h4>
-              <div className={`p-6 rounded-3xl border border-dashed leading-relaxed ${subTextClass} italic font-medium`}>
+              <div className={`p-4 sm:p-6 rounded-3xl border border-dashed leading-relaxed ${subTextClass} italic font-medium`}>
                 "{candidate.manifesto || "To build a stronger, more inclusive nation through innovation and shared prosperity."}"
               </div>
             </div>
@@ -1060,23 +1072,74 @@ const fetchResults = async () => {
     setCandidates([
       {
         id: "1",
-        name: { en: "Candidate A" },
-        symbol: "🌟",
-        votes: 120
+        name: { 
+          English: "Aria 'The Vibe' Sharma", 
+          Hindi: "आरिया 'द वाइब' शर्मा",
+          Telugu: "ఆరియా 'ది వైబ్' శర్మ",
+          Tamil: "ஆரியா 'தி வைப்' சர்மா"
+        },
+        symbol: "🌳",
+        party: "Green Growth Union (GGU)",
+        leader: "Aria Sharma",
+        manifesto: "Pioneering sustainable farming and green urban landscapes through advanced reforestation.",
+        logo: "https://api.dicebear.com/7.x/identicon/svg?seed=green",
+        votes: 1240,
+        voiceKeys: ["green", "aria", "vibe", "tree"]
       },
       {
         id: "2",
-        name: { en: "Candidate B" },
-        symbol: "🔥",
-        votes: 90
+        name: { 
+          English: "Kabir 'No Cap' Das", 
+          Hindi: "कबीर 'नो कैप' दास",
+          Telugu: "కబీర్ 'నో క్యాప్' దాస్",
+          Tamil: "கபீர் 'நோ கேப்' தாஸ்"
+        },
+        symbol: "💻",
+        party: "Digital Justice Alliance (DJA)",
+        leader: "Kabir Das",
+        manifesto: "Championing data rights and closing the digital divide with high-speed rural connectivity.",
+        logo: "https://api.dicebear.com/7.x/identicon/svg?seed=digital",
+        votes: 980,
+        voiceKeys: ["digital", "kabir", "nocap", "laptop"]
+      },
+      {
+        id: "3",
+        name: { 
+          English: "Zoya 'Main Character' Khan", 
+          Hindi: "ज़ోయా 'मेन कैरेक्टर' खान",
+          Telugu: "జోయా 'మెయిన్ క్యారెక్టర్' ఖాన్",
+          Tamil: "ஜோயா 'மெயின் கேரக்டர்' கான்"
+        },
+        symbol: "🌍",
+        party: "Global Progress Front (GPF)",
+        leader: "Zoya Khan",
+        manifesto: "Accelerating international trade and transforming India into a global workforce hub.",
+        logo: "https://api.dicebear.com/7.x/identicon/svg?seed=earth",
+        votes: 1560,
+        voiceKeys: ["zoya", "main", "character", "earth", "progress", "global"]
+      },
+      {
+        id: "4",
+        name: { 
+          English: "Rohan 'The Plug' Gupta", 
+          Hindi: "रोहन 'द प्लग' गुप्ता",
+          Telugu: "రోహన్ 'ది ప్లగ్' గుప్త",
+          Tamil: "ரோஹன் 'தி பிளக்' குப்தா"
+        },
+        symbol: "🤝",
+        party: "Unified Peoples Party (UPP)",
+        leader: "Rohan Gupta",
+        manifesto: "Promoting unity and grassroots democratic empowerment for inclusive community growth.",
+        logo: "https://api.dicebear.com/7.x/identicon/svg?seed=unified",
+        votes: 840,
+        voiceKeys: ["rohan", "plug", "unified", "peoples", "hands"]
       }
     ]);
     setLastUpdated(new Date());
   } catch (err) {
     console.error('Fetch results error:', err);
   }
-
-  };
+};
 
   const speak = (text: string) => {
     if (!isVoiceActive) return;
@@ -1214,8 +1277,11 @@ const fetchResults = async () => {
     setRetryAction(() => () => handleAadharSubmit());
 
     try {
+      // Check if already voted in localStorage
+      const votedList = JSON.parse(localStorage.getItem('voted_aadhaars') || '[]');
+      
       // ✅ DEMO LOGIC (NO API CALL)
-      if (aadhar === "111122223333") {
+      if (aadhar === "111122223333" || votedList.includes(aadhar)) {
         // simulate already voted case
         setAppState('ALREADY_VOTED');
         const t = TRANSLATIONS[language];
@@ -1523,25 +1589,24 @@ const fetchResults = async () => {
     setIsProcessing(true);
     setRetryAction(() => () => handleVote(candidateId));
     try {
-      const res = await fetch('/api/vote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ aadhar, candidateId }),
-      });
-      
-      if (res.ok) {
+      // ✅ DEMO LOGIC (NO API CALL)
+      setTimeout(() => {
+        // Save to localStorage to simulate "Already Voted" on next login
+        const votedList = JSON.parse(localStorage.getItem('voted_aadhaars') || '[]');
+        if (!votedList.includes(aadhar)) {
+          votedList.push(aadhar);
+          localStorage.setItem('voted_aadhaars', JSON.stringify(votedList));
+        }
+
         setVotedCandidateId(candidateId);
         setAppState('THANK_YOU');
         setSelectedCandidate(null);
         fetchResults();
         speak(t.recordedMsg);
-      } else {
-        const data = await res.json().catch(() => ({}));
-        setError(data.error || getFriendlyErrorMessage(res, 'casting your vote'));
-      }
+        setIsProcessing(false);
+      }, 1500);
     } catch (err) {
       setError(getFriendlyErrorMessage(err, 'casting your vote'));
-    } finally {
       setIsProcessing(false);
     }
   };
@@ -1573,7 +1638,7 @@ const fetchResults = async () => {
     };
 
     recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript.toLowerCase();
+      const transcript = (event.results[0][0].transcript || "").toLowerCase();
       handleVoiceCommand(transcript);
     };
 
@@ -1615,15 +1680,16 @@ const fetchResults = async () => {
 
     // Search for match in candidate names or symbols or voice keys
     const match = candidates.find(c => {
-      const currentName = _getCandidateName(c).toLowerCase();
-      const englishName = (typeof c.name === 'object' ? c.name.English : c.name).toLowerCase();
-      const symbol = c.symbol.toLowerCase();
+      const currentName = (_getCandidateName(c) || "").toLowerCase();
+      const nameObj = c.name as any;
+      const englishName = (typeof c.name === 'object' ? (nameObj.English || nameObj.en || "") : (c.name || "")).toLowerCase();
+      const symbol = (c.symbol || "").toLowerCase();
       const keys = c.voiceKeys || [];
       
       return transcript.includes(currentName) || 
              transcript.includes(englishName) || 
              transcript.includes(symbol) ||
-             keys.some(k => transcript.includes(k.toLowerCase()));
+             keys.some(k => k && transcript.includes(k.toLowerCase()));
     });
 
     if (match) {
@@ -2420,10 +2486,11 @@ const fetchResults = async () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {(() => {
                   const filtered = candidates.filter(c => {
-                    const currentName = _getCandidateName(c).toLowerCase();
-                    const englishName = (typeof c.name === 'object' ? c.name.English : c.name).toLowerCase();
-                    const symbol = c.symbol.toLowerCase();
-                    const query = searchQuery.toLowerCase();
+                    const currentName = (_getCandidateName(c) || "").toLowerCase();
+                    const nameObj = c.name as any;
+                    const englishName = (typeof c.name === 'object' ? (nameObj.English || nameObj.en || "") : (c.name || "")).toLowerCase();
+                    const symbol = (c.symbol || "").toLowerCase();
+                    const query = (searchQuery || "").toLowerCase();
                     return currentName.includes(query) || englishName.includes(query) || symbol.includes(query);
                   });
                   
@@ -2487,7 +2554,7 @@ const fetchResults = async () => {
                             }, 500);
                           }
                         }}
-                        className={`p-10 rounded-[40px] border shadow-sm transition-all text-left group flex items-center gap-8 relative overflow-hidden cursor-pointer ${
+                        className={`p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] border shadow-sm transition-all text-left group flex items-center gap-4 sm:gap-8 relative overflow-hidden cursor-pointer ${
                           isRecognized 
                             ? 'border-green-500 ring-4 ring-green-500/20 bg-green-50 scale-[1.02]' 
                             : isFeedbackActive
@@ -2519,12 +2586,29 @@ const fetchResults = async () => {
                             className="absolute inset-0 bg-green-500/5 pointer-events-none"
                           />
                         )}
-                        <div className={`text-6xl ${isRecognized ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'} transition-all shrink-0`}>{candidate.symbol}</div>
-                        <div>
-                          <h4 className={`text-2xl font-bold tracking-tight ${isRecognized ? 'text-green-700' : ''}`}>{_getCandidateName(candidate)}</h4>
-                          <p className={`text-xs font-bold uppercase tracking-widest mt-1 ${isRecognized ? 'text-green-600' : `group-hover:text-indigo-600 ${labelClass}`}`}>
-                            {isRecognized ? t.recognizedVoice : t.selectCand}
-                          </p>
+                        <div className="flex items-center gap-4 sm:gap-6">
+                          <div className={`text-4xl sm:text-6xl ${isRecognized ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'} transition-all shrink-0`}>{candidate.symbol}</div>
+                          {candidate.logo && (
+                            <img 
+                              src={candidate.logo} 
+                              alt={`${candidate.party} logo`} 
+                              className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl object-contain bg-slate-50 p-1 border border-slate-100" 
+                              referrerPolicy="no-referrer"
+                            />
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4 className={`text-lg sm:text-2xl font-bold tracking-tight truncate ${isRecognized ? 'text-green-700' : ''}`}>{_getCandidateName(candidate)}</h4>
+                          <div className="flex flex-wrap items-center gap-2 mt-1">
+                            {candidate.party && (
+                              <span className={`text-[8px] sm:text-[10px] font-black px-1.5 sm:px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-600 uppercase tracking-wider truncate max-w-[120px] sm:max-w-none`}>
+                                {candidate.party}
+                              </span>
+                            )}
+                            <p className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-widest ${isRecognized ? 'text-green-600' : `group-hover:text-indigo-600 ${labelClass}`}`}>
+                              • {isRecognized ? t.recognizedVoice : t.selectCand}
+                            </p>
+                          </div>
                         </div>
                         <div className="ml-auto flex items-center gap-4">
                           <button 
@@ -2723,15 +2807,20 @@ const fetchResults = async () => {
                 initial={{ scale: 0.5, rotate: -20 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="w-32 h-32 bg-green-500 rounded-[40px] flex items-center justify-center text-white mx-auto mb-10 shadow-3xl shadow-green-200"
+                className="w-32 h-32 bg-green-500 rounded-[40px] flex items-center justify-center text-white mx-auto mb-6 shadow-3xl shadow-green-200"
               >
                 <CheckCircle2 size={64} />
               </motion.div>
               
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4 uppercase">{t.voteSuccessMsg}</h2>
-              <p className={`text-base md:text-xl font-medium mb-12 ${subTextClass}`}>
-                {t.voteSuccessSub}
-              </p>
+              <div className="mb-8">
+                <span className="bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block">
+                  Vibe Checked ✅
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4 uppercase">{t.voteSuccessMsg}</h2>
+                <p className={`text-base md:text-xl font-medium ${subTextClass}`}>
+                  {t.voteSuccessSub}
+                </p>
+              </div>
               
               <div className={`p-8 rounded-[40px] border mb-12 text-left space-y-4 ${cardClass}`}>
                 <div className="flex justify-between items-center pb-4 border-b">
@@ -3091,13 +3180,13 @@ const fetchResults = async () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={handleHelp}
-          className="fixed bottom-6 right-6 md:bottom-8 md:left-8 z-[500] bg-indigo-600 text-white p-4 md:p-5 rounded-full shadow-2xl shadow-indigo-300 flex items-center justify-center group"
+          className="fixed bottom-6 right-6 z-[500] bg-indigo-600 text-white p-3 md:p-4 rounded-full shadow-2xl shadow-indigo-300 flex items-center justify-center group"
           aria-label="Help Assistant"
         >
-          <div className="absolute -top-12 md:left-0 right-0 md:right-auto bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none uppercase tracking-widest text-center">
-            24/7 AI Assistant
+          <div className="absolute -top-10 right-0 bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none uppercase tracking-widest text-center">
+            AI Assistant
           </div>
-          <HelpCircle className="w-6 h-6 md:w-8 md:h-8" />
+          <Sparkles className="w-5 h-5 md:w-6 md:h-6" />
         </motion.button>
       )}
 
