@@ -1,90 +1,20 @@
-# 🗳️ SmartVote-AI
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-An AI-powered digital voting system that enables secure, accessible, and transparent remote voting.
+# Run and deploy your AI Studio app
 
----
-## 👩‍💻 Author
+This contains everything you need to run your app locally.
 
-**Sri Hershini P**
----
+View your app in AI Studio: https://ai.studio/apps/72a9465e-b279-4dbf-b748-d6281f436f75
 
-## 🔗 Live Preview
+## Run Locally
 
-[Click here to view the app](https://aistudio.google.com/apps/72a9465e-b279-4dbf-b748-d6281f436f75)
+**Prerequisites:**  Node.js
 
----
-
-## 📌 Project Overview
-
-SmartVote-AI is a digital voting application designed to improve accessibility and transparency. It allows users to vote remotely with secure authentication and ensures a strict one-person-one-vote policy.
-
----
-
-## 🚀 Features
-
-- 🔐 Secure authentication (Face + Fingerprint simulation)
-- 🗳️ One-person-one-vote system
-- 📊 Live results dashboard (real-time updates)
-- 🎙️ Voice-assisted voting
-- 🌐 Multilingual support (including Malayalam)
-- ♿ Accessibility settings (font size, contrast, speech rate)
-
----
-
-## 📱 Screenshots
-
-### 🔹 Login Screens
-<p align="center">
-  <img src="login1.jpeg" width="250"/>
-  <img src="login 2.jpeg" width="250"/>
-</p>
-
----
-
-### 🔹 Verification Screens
-<p align="center">
-  <img src="verification 1.jpeg" width="250"/>
-  <img src="verification 2.jpeg" width="250"/>
-</p>
-
----
-
-### 🔹 Voting Screens
-<p align="center">
-  <img src="voting 1.jpeg" width="250"/>
-  <img src="voting 2.jpeg" width="250"/>
-  <img src="voting 3.jpeg" width="250"/>
-</p>
-
----
-
-### 🔹 Results Screens
-<p align="center">
-  <img src="result 1.jpeg" width="250"/>
-  <img src="result 2.jpeg" width="250"/>
-  <img src="result 3.jpeg" width="250"/>
-</p>
-
----
-## 👩‍💻 Author
-
-**Sri Hershini P**
----
-
-
-## 🛠️ Tech Stack
-
-- Frontend: React / Next.js
-- Backend: Node.js
-- AI: Gemini API
-- Deployment: Google AI Studio
-
----
-
-## ▶️ Run Locally
-
-**Prerequisites:** Node.js  
 
 1. Install dependencies:
-```bash
-npm install
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
