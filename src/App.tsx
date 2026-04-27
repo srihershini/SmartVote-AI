@@ -3191,7 +3191,7 @@ export default function App() {
           />
         )}
       </AnimatePresence>
-      <button onClick={async () => {
+<button onClick={async () => {
   try {
     const res = await fetch('/api/verify-aadhaar', {
       method: 'POST',
@@ -3201,12 +3201,23 @@ export default function App() {
         mobile: "9876543210"
       })
     });
-    console.log("Request sent");
-    console.log("Status:",res.status);
 
-    const data = await res.json();
-    alert("API Success ✅");
-    console.log(data);
+    console.log("Request sent");
+    console.log("Status:", res.status);
+
+    const text = await res.text();
+    console.log("RAW RESPONSE:", text);
+
+    let data;
+    try {
+      data = JSON.parse(text);
+      console.log("PARSED:", data);
+      alert("API Success ✅");
+    } catch (e) {
+      console.error("JSON ERROR:", e);
+      alert("Not JSON response ❌");
+    }
+
   } catch (e) {
     alert("API Failed ❌");
     console.error(e);
@@ -3214,6 +3225,6 @@ export default function App() {
 }}>
   TEST API
 </button>
-    </div>
-  );
+</div>
+);
 }
